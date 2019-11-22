@@ -1,15 +1,15 @@
-package entity;
+package com.johnny.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * @author Administrator
  */
-public class successKilled {
+public class SuccessKilled {
     private Long secKillId;
     private Long userPhone;
-    private int state;
-    private Timestamp createTime;
+    private short state;
+    private Date createTime;
 
     @Override
     public String toString() {
@@ -37,19 +37,19 @@ public class successKilled {
         this.userPhone = userPhone;
     }
 
-    public int getState() {
+    public short getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(short state) {
         this.state = state;
     }
 
-    public Timestamp getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Timestamp createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 }

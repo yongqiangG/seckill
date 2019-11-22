@@ -1,17 +1,17 @@
-package entity;
+package com.johnny.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * @author Administrator
  */
-public class secKill {
+public class SecKill {
     private Long secKillId;
     private String name;
     private int number;
-    private Timestamp createTime;
-    private Timestamp startTime;
-    private Timestamp endTime;
+    private Date createTime;
+    private Date startTime;
+    private Date endTime;
 
     public void setSecKillId(Long secKillId) {
         this.secKillId = secKillId;
@@ -25,15 +25,15 @@ public class secKill {
         this.number = number;
     }
 
-    public void setCreateTime(Timestamp createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
@@ -49,15 +49,15 @@ public class secKill {
         return number;
     }
 
-    public Timestamp getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public Timestamp getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public Timestamp getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 

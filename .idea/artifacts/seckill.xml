@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="seckill">
+    <output-path>$PROJECT_DIR$/../apache-tomcat-7.0.70/webapps/seckill</output-path>
+    <root id="root" />
+  </artifact>
+</component>
