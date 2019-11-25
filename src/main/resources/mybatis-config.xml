@@ -6,9 +6,9 @@
     <!--mybatis全局配置-->
     <settings>
         <!--使用jdbc的getGenerateKeys获取数据库自增主键值-->
-        <setting name="useGenerateKeys" value="true"/>
-        <setting name="userColumnLabel" value="true"/>
-        <setting name="mapUnderscoreCamelCase" value="true"/>
+        <setting name="useGeneratedKeys" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
 </configuration>

@@ -9,13 +9,13 @@
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${driver}"/>
         <property name="jdbcUrl" value="${url}"/>
-        <property name="user" value="${username}"/>
+        <property name="user" value="${user}"/>
         <property name="password" value="${password}"/>
 
-        <property name="maxPoolSize" value="30"/>
-        <property name="minPoolSize" value="10"/>
+        <property name="maxPoolSize" value="100"/>
+        <property name="minPoolSize" value="1"/>
         <property name="autoCommitOnClose" value="false"/>
-        <property name="checkoutTimeout" value="1000"/>
+        <property name="checkoutTimeout" value="5000"/>
         <property name="acquireRetryAttempts" value="2"/>
     </bean>
 
@@ -27,7 +27,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFaction"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <property name="basePackage" value="com.johnny.dao"/>
     </bean>
 
