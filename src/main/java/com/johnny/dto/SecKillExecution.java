@@ -1,6 +1,7 @@
 package com.johnny.dto;
 
 import com.johnny.entity.SuccessKilled;
+import com.johnny.enums.SecKillStateEnum;
 
 /*封装秒杀执行结果*/
 public class SecKillExecution {
@@ -39,6 +40,18 @@ public class SecKillExecution {
 
     public void setSuccessKilled(SuccessKilled successKilled) {
         this.successKilled = successKilled;
+    }
+
+    public SecKillExecution(long secKillId, SecKillStateEnum stateEnum, SuccessKilled successKilled) {
+        this.secKillId = secKillId;
+        this.state = stateEnum.getState();
+        this.stateInfo = stateEnum.getStateInfo();
+        this.successKilled = successKilled;
+    }
+    public SecKillExecution(long secKillId,SecKillStateEnum stateEnum){
+        this.secKillId = secKillId;
+        this.state = stateEnum.getState();
+        this.stateInfo = stateEnum.getStateInfo();
     }
 
     @Override
