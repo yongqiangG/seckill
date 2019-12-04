@@ -1,6 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="exploded-war" name="seckill">
-    <output-path>F:/web/apache-tomcat-8.5.38/webapps</output-path>
-    <root id="root" />
-  </artifact>
-</component>
