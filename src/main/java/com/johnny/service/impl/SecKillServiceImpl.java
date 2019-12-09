@@ -2,6 +2,7 @@ package com.johnny.service.impl;
 
 import com.johnny.dao.SecKillDao;
 import com.johnny.dao.SuccessKilledDao;
+import com.johnny.dao.cache.RedisDao;
 import com.johnny.dto.Exposer;
 import com.johnny.dto.SecKillExecution;
 import com.johnny.entity.SecKill;
@@ -29,6 +30,8 @@ public class SecKillServiceImpl implements SecKillService {
     private SecKillDao secKillDao;
     @Autowired
     private SuccessKilledDao successKilledDao;
+    @Autowired
+    private RedisDao redisDao;
 
     @Override
     public List<SecKill> getSecKillList() {
@@ -42,9 +45,19 @@ public class SecKillServiceImpl implements SecKillService {
 
     @Override
     public Exposer exportSecKillUrl(long secKillId) {
-        SecKill secKill = secKillDao.queryById(secKillId);
+        //SecKill secKill = secKillDao.queryById(secKillId);
+        //redis优化,从redis缓存中查找
+        SecKill secKill = redisDao.getSecKill(secKillId);
         if (secKill == null) {
-            return new Exposer(false, secKillId);
+            //redis缓存中没有从数据库中查找
+            secKill = secKillDao.queryById(secKillId);
+            if(secKill==null){
+                //数据库中查找不到对应记录
+                return new Exposer(false, secKillId);
+            }else{
+                //放入redis缓存中
+                redisDao.putSecKill(secKill);
+            }
         }
         Date startTime = secKill.getStartTime();
         Date endTime = secKill.getEndTime();
