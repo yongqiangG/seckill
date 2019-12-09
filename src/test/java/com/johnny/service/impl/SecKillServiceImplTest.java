@@ -39,7 +39,7 @@ public class SecKillServiceImplTest {
 
     @Test
     public void exportSecKillUrl() {
-        Exposer exposer = secKillService.exportSecKillUrl(1000L);
+        Exposer exposer = secKillService.exportSecKillUrl(1002L);
         logger.info("Exposer={}",exposer);
     }
 
@@ -58,13 +58,13 @@ public class SecKillServiceImplTest {
     }
     @Test
     public  void testSecKillLogic(){
-        long secKillId = 1000L;
+        long secKillId = 1002L;
         Exposer exposer = secKillService.exportSecKillUrl(secKillId);
         if(exposer.isExposed()){
             //秒杀已开启
             logger.info("Exposer={}",exposer);
             long userPhone = 12345678901L;
-            String md5 = "45d9e711e79c9c74fd5e2f243b797e7f";
+            String md5 = "d409ce9070ec8a885f651b7f40b3808f";
 
             try {
                 SecKillExecution execution = secKillService.executeSecKill(secKillId,userPhone,md5);

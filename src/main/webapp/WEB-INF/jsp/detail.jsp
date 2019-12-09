@@ -57,8 +57,14 @@
 <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <%--倒计时插件--%>
 <script src="https://cdn.bootcss.com/jquery.countdown/2.1.0/jquery.countdown.min.js"></script>
-<script src="/resources/script/secKill.js" type="text/javascript"></script>
+<script src="/seckill/resources/script/secKill.js" type="text/javascript"></script>
 <script type="text/javascript">
-
+    $(function(){
+        secKill.detail.init({
+            secKillId : ${secKill.secKillId},
+            startTime: ${secKill.startTime.time},
+            endTime: ${secKill.endTime.time}
+        })
+    })
 </script>
 </html>

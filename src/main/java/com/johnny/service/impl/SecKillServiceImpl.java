@@ -79,7 +79,7 @@ public class SecKillServiceImpl implements SecKillService {
                     throw new RepeatKillException("secKill repeated");
                 }else{
                     //秒杀成功
-                    SuccessKilled successKilled = successKilledDao.queryByIdWithSecKill(secKillId);
+                    List<SuccessKilled> successKilled = successKilledDao.queryByIdWithSecKill(secKillId);
                     return new SecKillExecution(secKillId, SecKillStateEnum.stateOf(1),successKilled);
                 }
             }

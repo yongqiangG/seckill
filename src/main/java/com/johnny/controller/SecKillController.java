@@ -100,7 +100,7 @@ public class SecKillController {
             return result;
         } catch (RepeatKillException e) {
             SecKillExecution secKillExecution = new SecKillExecution(secKillId, SecKillStateEnum.REPEAT_KILL);
-            result = new SecKillResult<>(false, secKillExecution);
+            result = new SecKillResult<>(true, secKillExecution);
             return result;
         } catch (SecKillCloseException e) {
             SecKillExecution secKillExecution = new SecKillExecution(secKillId, SecKillStateEnum.END);
@@ -108,7 +108,7 @@ public class SecKillController {
             return result;
         } catch (SecKillException e) {
             SecKillExecution secKillExecution = new SecKillExecution(secKillId, SecKillStateEnum.DATA_REWRITE);
-            result = new SecKillResult<>(false, secKillExecution);
+            result = new SecKillResult<>(true, secKillExecution);
             return result;
         }
     }

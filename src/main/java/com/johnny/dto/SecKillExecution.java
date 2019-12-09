@@ -3,12 +3,14 @@ package com.johnny.dto;
 import com.johnny.entity.SuccessKilled;
 import com.johnny.enums.SecKillStateEnum;
 
+import java.util.List;
+
 /*封装秒杀执行结果*/
 public class SecKillExecution {
     private long secKillId;
     private int state;
     private String stateInfo;
-    private SuccessKilled successKilled;
+    private List<SuccessKilled> successKilled;
 
     public long getSecKillId() {
         return secKillId;
@@ -34,15 +36,15 @@ public class SecKillExecution {
         this.stateInfo = stateInfo;
     }
 
-    public SuccessKilled getSuccessKilled() {
+    public List<SuccessKilled> getSuccessKilled() {
         return successKilled;
     }
 
-    public void setSuccessKilled(SuccessKilled successKilled) {
+    public void setSuccessKilled(List<SuccessKilled> successKilled) {
         this.successKilled = successKilled;
     }
 
-    public SecKillExecution(long secKillId, SecKillStateEnum stateEnum, SuccessKilled successKilled) {
+    public SecKillExecution(long secKillId, SecKillStateEnum stateEnum, List<SuccessKilled> successKilled) {
         this.secKillId = secKillId;
         this.state = stateEnum.getState();
         this.stateInfo = stateEnum.getStateInfo();
