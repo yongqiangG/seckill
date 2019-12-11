@@ -39,7 +39,7 @@ public class SecKillServiceImplTest {
 
     @Test
     public void exportSecKillUrl() {
-        Exposer exposer = secKillService.exportSecKillUrl(1006L);
+        Exposer exposer = secKillService.exportSecKillUrl(1002L);
         logger.info("Exposer={}",exposer);
     }
 

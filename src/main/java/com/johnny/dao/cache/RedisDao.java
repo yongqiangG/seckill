@@ -31,6 +31,7 @@ public class RedisDao {
                 if (bytes != null) {
                     SecKill secKill = schema.newMessage();
                     ProtostuffIOUtil.mergeFrom(bytes, secKill, schema);
+                    logger.info("从redis获取到的seckill: "+secKill);
                     return secKill;
                 }
             } finally {
@@ -52,6 +53,7 @@ public class RedisDao {
                 //超时缓存,保证数据一致性
                 int timeOut = 60 * 60;//1h
                 String result = jedis.setex(key.getBytes(), timeOut, bytes);
+                logger.info("放入redis中的secKill: "+secKill);
                 return result;
             } finally {
                 jedis.close();
