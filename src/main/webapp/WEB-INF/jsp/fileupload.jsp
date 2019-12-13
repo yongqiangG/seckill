@@ -9,14 +9,14 @@
 <body>
     <div class="container">
         <div class="panel panel-default text-center">
-            <form action="${pageContext.request.contextPath}/file/fileUpload"
+            <form action="${pageContext.request.contextPath}/file/fileupload"
                   method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="panel-heading">
                     <label for="exampleInputFile">请上传你的固件</label>
                     </div>
                     <div class="panel-body">
-                    <input type="file" id="exampleInputFile">
+                    <input type="file" id="exampleInputFile" name="uploadFile">
                     </div>
                     <p class="help-block">点击上方按钮选择需要升级的固件</p>
                 </div>

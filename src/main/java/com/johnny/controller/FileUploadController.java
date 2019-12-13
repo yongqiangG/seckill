@@ -24,20 +24,20 @@ public class FileUploadController {
         return "fileupload";
     }
 
-    @RequestMapping("/fileUpload")
+    @RequestMapping(value = "/fileupload")
     @ResponseBody
     public String uploadFile(HttpServletRequest request, MultipartFile uploadFile) {
         try {
             String originalFilename = uploadFile.getOriginalFilename();
+            logger.info("文件名:{}",originalFilename);
             InputStream fileIn = uploadFile.getInputStream();
             byte[] bytes = new byte[1024];
             int len = 0;
-            int temp = 0;
-            while ((temp = fileIn.read()) != -1){
-                bytes[len] = (byte) temp;
-                len++;
+            while ((len = fileIn.read(bytes)) != -1) {
+                System.out.println(new String(bytes,0,len));
             }
-            System.out.println(new String(bytes,0,len));
+            fileIn.close();
+            return "SUCCESS";
         } catch (IOException e) {
             e.printStackTrace();
         }
