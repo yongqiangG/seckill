@@ -1,5 +1,6 @@
 package com.johnny.controller;
 
+import com.johnny.utils.UDPServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -42,5 +43,16 @@ public class FileUploadController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @RequestMapping(value="/macReset")
+    @ResponseBody
+    public String macReset(){
+        try {
+            UDPServer.serverStartListen(3339);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "success";
     }
 }
