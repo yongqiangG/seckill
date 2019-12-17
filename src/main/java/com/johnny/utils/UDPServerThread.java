@@ -5,32 +5,45 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-public class UDPServerThread extends Thread {
-    DatagramSocket socket;
-    DatagramPacket packet;
-    byte[] data;
+/**
+ * 相关线程类
+ * @author Jian
+ */
+public class UDPServerThread extends Thread{
+    DatagramSocket socket = null;
+    DatagramPacket packet = null;
+    byte[] data = null;
 
-    public UDPServerThread(DatagramSocket socket,DatagramPacket packet,byte[] data){
+    public UDPServerThread(byte[] data,DatagramSocket socket,DatagramPacket packet) {
         this.socket = socket;
-        this.packet = packet;
+        this.packet = packet;interrupt();
         this.data = data;
     }
-
-    @Override
-    public void run() {
-        //接受客户端数据
-        System.out.println("启动线程:");
+    //线程要执行的方法
+    public void run(){
+        System.out.println("线程启动");
         String info = new String(data);
-        System.out.println("接收到客户端数据:"+info);
-        //响应客户端数据
+        System.out.println("收到设备信息："+info);
         InetAddress address = packet.getAddress();
         int port = packet.getPort();
-        byte[] responseData = new String("hi!").getBytes();
-        DatagramPacket responsePacket = new DatagramPacket(responseData,responseData.length,address,port);
+
+        String msg = "202054585041524b01000000ffffffff00007010305A453D0652454144590000";
+        int len = msg.length()/2;
+        byte[] data2 = new byte[len];
+        for (int i = 0; i < len; i++) {
+            String n = msg.substring(i*2,i*2+2);
+            int num = Integer.parseInt(n,16);
+            data2[i] = (byte)num;
+        }
+        DatagramPacket packet2 = new DatagramPacket(data2, data2.length, address, port);
+        //3.响应客戶端
         try {
-            socket.send(responsePacket);
+            socket.send(packet2);
+            System.out.println("服务器端数据发送完毕");
         } catch (IOException e) {
             e.printStackTrace();
+        }finally{
+
         }
     }
 }

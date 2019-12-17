@@ -4,16 +4,25 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
+/**
+ * 服務器端，基于UDP的用戶登錄
+ * @author Jian
+ *
+ */
 public class UDPServer {
     public static void main(String[] args) throws IOException {
-        DatagramSocket socket = new DatagramSocket(9001);
-        System.out.println("服务端已启动");
+        DatagramSocket socket = new DatagramSocket(3339);
+        byte[] data = new byte[1024];
+        DatagramPacket packet = new DatagramPacket(data, data.length);
+        System.out.println("-----服务端已启动-----");
+        //循环监听
         while(true){
-            byte[] bytes = new byte[1024];
-            DatagramPacket packet = new DatagramPacket(bytes,bytes.length);
             socket.receive(packet);
-            //每次接收到数据开启一个新的线程
-            new UDPServerThread(socket,packet,bytes).start();
+            UDPServerThread thread = new UDPServerThread(data,socket, packet);
+            thread.start();
         }
+
+        //4.關閉資源
+        //socket.close();
     }
 }

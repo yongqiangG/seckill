@@ -18,7 +18,7 @@ public class UDPClient {
             }
             byte[] bytes = str.getBytes();
             InetAddress address = InetAddress.getByName("127.0.0.1");
-            int port = 9001;
+            int port = 3339;
             DatagramPacket packet = new DatagramPacket(bytes,bytes.length,address,port);
             socket.send(packet);
         }

@@ -21,6 +21,17 @@ public class HardWareDataUtil {
         List list2 = TransToUdp(list1);
     }
 
+    //返回0x72固件升级置零的每一udp包组成的list
+    public static List<String> hardWarePackage(File file){
+        List list = getLines(file);
+        //将每一行string组成的list转换成每16行组成一个string的list
+        List list1 = transToList(list);
+        //去除每一行的Address部分
+        //返回数据结构:高字节地址+低字节地址+256字节数据(最后可能不满256字节)
+        List list2 = TransToUdp(list1);
+        return list2;
+    }
+
     //使用F补满数据部分的16字节长度
     private static String fillDataStr(String str){
         StringBuilder sb = new StringBuilder();
