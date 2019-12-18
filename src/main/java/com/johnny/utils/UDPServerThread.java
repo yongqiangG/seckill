@@ -12,24 +12,29 @@ public class UDPServerThread extends Thread {
     DatagramSocket socket = null;
     DatagramPacket packet = null;
     byte[] data = null;
+    String macCode = null;
 
-    public UDPServerThread(byte[] data, DatagramSocket socket, DatagramPacket packet) {
+    public UDPServerThread(byte[] data, DatagramSocket socket, DatagramPacket packet,String macCode) {
         this.socket = socket;
         this.packet = packet;
         this.data = data;
+        this.macCode = macCode;
     }
 
     //线程要执行的方法
     public void run() {
-        System.out.println("线程启动");
         String info = new String(data);
-        System.out.println("收到设备信息：" + info);
         InetAddress address = packet.getAddress();
         int port = packet.getPort();
-        //动态获取机器码
         String hexString = bytesToHex(data);
+        System.out.println("收到来自机器码"+macCode+"的信息：" + hexString+",线程已启动");
+
+        /*从设备回复包动态获取机器码
         int macCode = Integer.valueOf(getMacCode(hexString));
-        String msg = "202054585041524b01000000ffffffff00007010"+Integer.toHexString(macCode)+"0652454144590000";
+        */
+        //获取前端机器码
+        String mac = Integer.toHexString(Integer.valueOf(macCode));
+        String msg = "202054585041524b01000000ffffffff00007010"+mac+"0652454144590000";
         //String msg = "202054585041524b01000000ffffffff00007010305A453D0652454144590000";
         int len = msg.length() / 2;
         byte[] data2 = new byte[len];
@@ -45,7 +50,7 @@ public class UDPServerThread extends Thread {
             //判断是否需要发送进入烧写模式
             if (cmd == 0x70) {
                 socket.send(packet2);
-                System.out.println("服务器端70指令数据发送完毕");
+                System.out.println("服务器端70指令数据发送完毕:"+bytesToHex(data2));
             } else {
                 System.out.println("非70指令,暂时无需处理");
             }
@@ -58,7 +63,7 @@ public class UDPServerThread extends Thread {
      * 17-18字节
      * 获取指令编码,返回值为10进制数字
      */
-    private static int getCommand(String msg) {
+    public static int getCommand(String msg) {
         String cmd = msg.substring(34, 38);
         int intCmd = Integer.parseInt(cmd, 16);
         return intCmd;

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="seckill:Web exploded">
-    <output-path>F:/web/apache-tomcat-8.5.38/webapps/seckill</output-path>
+    <output-path>$PROJECT_DIR$/../apache-tomcat-7.0.70/webapps/seckill</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="seckill/web/Web" />
       <element id="directory" name="WEB-INF">

@@ -9,19 +9,26 @@ import java.net.DatagramSocket;
  */
 public class UDPServer {
     //参数:本地监听端口号
-    public static void serverStartListen(int port) throws IOException {
+    public static void serverStartListen(String macCode,int port) throws IOException {
         DatagramSocket socket = new DatagramSocket(port);
         byte[] data = new byte[Config.UDP_RECEIVE_LEN];
         DatagramPacket packet = new DatagramPacket(data, data.length);
-        System.out.println("-----服务端已启动,等待客户端的数据-----");
+        System.out.println("-----服务端已启动,正在监听端口"+port+"的数据-----");
         while(true){
             socket.receive(packet);
-            UDPServerThread thread = new UDPServerThread(data,socket, packet);
-            thread.start();
+            String hexString = UDPServerThread.bytesToHex(data);
+            int cmd = UDPServerThread.getCommand(hexString);
+            if(cmd==0x70){
+                UDPServerThread thread = new UDPServerThread(data,socket, packet,macCode);
+                thread.start();
+            }
+
+
         }
     }
 
     public static void main(String[] args) throws IOException {
+        String macCode = null;
         DatagramSocket socket = new DatagramSocket(3339);
         byte[] data = new byte[Config.UDP_RECEIVE_LEN];
         DatagramPacket packet = new DatagramPacket(data, data.length);
@@ -29,7 +36,7 @@ public class UDPServer {
         //循环监听
         while(true){
             socket.receive(packet);
-            UDPServerThread thread = new UDPServerThread(data,socket, packet);
+            UDPServerThread thread = new UDPServerThread(data,socket, packet,macCode);
             thread.start();
         }
 
